@@ -1,0 +1,23 @@
+name: Deploy to Google Apps Script
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push to Apps Script
+        uses: daikikatsuragawa/clasp-action@v1.2.0
+        with:
+          accessToken: ${{ secrets.ACCESS_TOKEN }}
+          idToken:      ${{ secrets.ID_TOKEN }}
+          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          clientId:     ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          scriptId:     ${{ secrets.SCRIPT_ID }}
+          command: 'push'
